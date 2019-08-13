@@ -1,0 +1,33 @@
+* {
+    padding: 0;
+    margin: 0;
+}
+
+.fields {
+    border-left: 1px solid black;
+    border-top: 1px solid black;
+    margin: 20px;
+    overflow: hidden;
+    display: inline-block;
+}
+
+.fields > div {
+    width: 20px;
+    height: 20px;
+    box-sizing: border-box;
+    border-right: 1px solid black;
+    border-bottom: 1px solid black;
+    float: left;
+}
+.fields > div.row-start {
+    clear: both;
+}
+.fields > div[data-game="fruit"] {
+    background-color: green;
+}
+.fields > div[data-game="snake"] {
+    background-color: blue;
+}
+.fields > div[data-game="wall"] {
+    background-color: black;
+}
