@@ -1,35 +1,40 @@
 window.addEventListener('load', () => {
     const keys = document.querySelectorAll('.key');
-    for (let i = 0; i < keys.length; i++) {
-        keys[i].addEventListener('mousedown', function (e) {
-            const key = e.target;
+    bindClickListener(keys);
+    bindKeyDownListener();
+    bindKeyUpListener();
+    
+
+    function bindClickListener (keys) {
+        for (let i = 0; i < keys.length; i++) {
+            let key;
+            keys[i].addEventListener('mousedown', function (e) {
+                key = e.target;
+                playNote(key);
+            });
+            keys[i].addEventListener('mouseup', function (e) {
+                removeActiveClass(key);
+            });
+        }
+    }
+    function bindKeyDownListener() {
+        document.addEventListener('keydown', function (e) {
+            const key = document.querySelector(`.key[data-key="${e.code}"]`);
             if (key === null) {
                 return
             }
-            addActiveClass(key);
+            playNote(key);
         });
-        keys[i].addEventListener('mouseup', function (e) {
-            const key = e.target;
+    }
+    function bindKeyUpListener() {
+        document.addEventListener('keyup', function (e) {
+            const key = document.querySelector(`.key[data-key="${e.code}"]`);
             if (key === null) {
                 return
             }
             removeActiveClass(key);
         });
     }
-    document.addEventListener('keydown', function (e) {
-        const key = document.querySelector(`.key[data-key="${e.key}"]`);
-        if (key === null) {
-            return
-        }
-        addActiveClass(key);
-    });
-    document.addEventListener('keyup', function (e) {
-        const key = document.querySelector(`.key[data-key="${e.key}"]`);
-        if (key === null) {
-            return
-        }
-        removeActiveClass(key);
-    });
 
     const addActiveClass = (key) => {
         key.classList.add('key-active');
@@ -37,5 +42,14 @@ window.addEventListener('load', () => {
     const removeActiveClass = (key) => {
         key.classList.remove('key-active');
     };
+    const playNote = (key) => {
+        const currentNote = key.getAttribute('data-key');
+        const currentNoteSound = new Audio(`audio/${currentNote}.mp3`);
+        console.log(currentNoteSound);
+        currentNoteSound.play();
+        addActiveClass(key);
+    };
+
+
 
 });

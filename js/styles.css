@@ -9,13 +9,14 @@ body {
     border-left: 1px solid black;
     border-bottom: 1px solid black;
     border-top: 1px solid black;
-    display: flex;
+    display: block;
 }
 .white-key {
     border-right: 1px solid black;
     width: 50px;
     height: 200px;
     position: relative;
+    float: left;
 }
 .black-key {
     border-left: 1px solid black;
@@ -26,25 +27,25 @@ body {
     background-color: black;
     z-index: 1;
 }
-.black-key[data-key="w"] {
+.black-key[data-key="KeyW"] {
     left: 41px;
 }
-.black-key[data-key="e"] {
+.black-key[data-key="KeyE"] {
     left: 92px;
 }
-.black-key[data-key="t"] {
+.black-key[data-key="KeyT"] {
     left: 194px;
 }
-.black-key[data-key="y"] {
+.black-key[data-key="KeyY"] {
     left: 245px;
 }
-.black-key[data-key="u"] {
+.black-key[data-key="KeyU"] {
      left: 297px;
 }
-.black-key[data-key="o"] {
+.black-key[data-key="KeyO"] {
     left: 399px;
 }
-.black-key[data-key="p"] {
+.black-key[data-key="KeyP"] {
     left: 450px;
 }
 
