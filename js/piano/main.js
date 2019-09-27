@@ -15,20 +15,21 @@ window.addEventListener('load', () => {
     }
 
     function bindClickListener (keys) {
-        for (let i = 0; i < keys.length; i++) {
-            let key;
-            keys[i].addEventListener('mousedown', function (e) {
+        keys.forEach(key => {
+            key.addEventListener('mousedown', e => {
                 key = e.target;
                 piano.playNote(key);
             });
-            keys[i].addEventListener('mouseup', function () {
-                piano.removeActiveClass(key);
+            key.addEventListener('mouseup', () => {
+                keys.forEach(key => {
+                    piano.removeActiveClass(key)
+                })
             });
-        }
+        });
     }
 
     function bindKeyDownListener() {
-        document.addEventListener('keydown', function (e) {
+        document.addEventListener('keydown', e => {
             const key = document.querySelector(`.key[data-key="${e.code}"]`);
             if (key === null) return;
             piano.playNote(key);
@@ -36,7 +37,7 @@ window.addEventListener('load', () => {
     }
 
     function bindKeyUpListener() {
-        document.addEventListener('keyup', function (e) {
+        document.addEventListener('keyup', e => {
             const key = document.querySelector(`.key[data-key="${e.code}"]`);
             if (key === null)return;
             piano.removeActiveClass(key);

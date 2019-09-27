@@ -2,6 +2,7 @@ class Piano {
     constructor(elem, song) {
         this.elem = elem;
         this.song = song;
+        this.soundDuration = 640;
         this.isEnd = false;
         this.counter = 0;
         this.currentKey = null;
@@ -11,28 +12,28 @@ class Piano {
     demoPlay(e) {
         this.counter = 0;
         this.isEnd = false;
-        console.log(this.counter);
-        console.log(this.currentKey);
         this.elem = e.target;
         this.elem.disabled = true;
         this.getKey();
         this.currentNote = new Audio(`audio/${this.song[this.counter]}.mp3`);
         this.currentNote.play();
-        this.currentNote.addEventListener('pause', () => this.next()
-        );
+        this.currentNote.addEventListener('pause', () => this.next());
         this.addActiveClass(this.currentKey);
         //force active class removing
         setTimeout(() => {
             this.removeActiveClass(this.currentKey);
-        },570);
+        },this.soundDuration - 5);
 
         const pause = setInterval(() => {
-            this.isEnd && clearInterval(pause);
+            if (this.counter > this.song.length-3) {
+                clearInterval(pause);
+            }
             this.counter += 1;
             this.currentNote.pause();
             this.getKey();
             this.removeActiveClass(this.currentKey);
-        }, 580);
+            console.log(this.counter);
+        }, this.soundDuration);
     }
 
     next() {
@@ -44,7 +45,7 @@ class Piano {
             this.getKey();
             this.removeActiveClass(this.currentKey);
             this.isEnd && clearInterval(removeActiveClassInterval);
-        }, 560);
+        }, this.soundDuration - 15);
         if (this.counter > this.song.length-2) {
             this.isEnd = true;
             this.elem.disabled = false;
